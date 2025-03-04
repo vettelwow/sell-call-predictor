@@ -1,16 +1,13 @@
-import streamlit as st
-import numpy as np
+import os
 import pickle
 
-# 加載機器學習模型
-import os
+# 取得目前 Python 檔案所在的目錄
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(current_dir, "sell_call_model.pkl")
 
-with open(model_path, 'rb') as model_file:
-    model = pickle.load(model_file)
-
-
-# 應用介面
-st.title('SELL CALL 成功率預測工具')
-st.write("請輸入市場數據，系統將預測 SELL CALL 的成功率，並給出建議。")
+# 確保檔案存在後再載入
+if os.path.exists(model_path):
+    with open(model_path, 'rb') as model_file:
+        model = pickle.load(model_file)
+else:
+    raise FileNotFoundError(f"❌ 錯誤：找不到模型檔案 {model_path}，請確認 `sell_call_model.pkl` 是否已正確上傳！")
