@@ -1,0 +1,20 @@
+import pickle
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
+# 假設你的特徵（X_train, y_train）已經準備好
+# 如果還沒有，你需要載入並訓練模型
+
+# 建立一個簡單的隨機森林模型（示範用）
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+
+# 這裡應該用你的真實數據進行訓練
+X_train = np.random.rand(100, 5)  # 假設 5 個特徵
+y_train = np.random.randint(0, 2, 100)
+model.fit(X_train, y_train)
+
+# 儲存模型
+with open("sell_call_model.pkl", "wb") as file:
+    pickle.dump(model, file)
+
+print("✅ 模型已儲存為 sell_call_model.pkl")
